@@ -6,4 +6,11 @@ export default defineNuxtConfig({
   tailwindcss: {
     configPath: '~/tailwind.config.js',  // Points to the file above
   },
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon-2.ico' },
+      ]
+    }
+  }
 })
