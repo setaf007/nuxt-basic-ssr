@@ -9,31 +9,63 @@ const product = findProductById(id)
 </script>
 
 <template>
-  <section v-if="product">
-    <div class="grid gap-6 md:grid-cols-2">
-      <img
-        :src="product.image"
-        :alt="product.name"
-        class="w-full rounded border"
-      />
+  <div v-if="product" class="max-w-7xl mx-auto">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center text-sm text-gray-500 mb-16 bg-gray-50 p-4 rounded-2xl">
+      <NuxtLink to="/" class="hover:text-store-red font-medium">Home</NuxtLink>
+      <span class="mx-2">/</span>
+      <NuxtLink to="/products" class="hover:text-store-red font-medium">Products</NuxtLink>
+      <span class="mx-2">/</span>
+      <span class="font-semibold text-gray-900">{{ product.name }}</span>
+    </nav>
 
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <!-- Product Gallery -->
+      <div class="sticky top-24">
+        <div class="w-full aspect-square bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-4xl p-12 flex items-center justify-center shadow-2xl">
+          <img :src="product.image" :alt="product.name" class="w-96 h-96 object-cover rounded-3xl shadow-2xl max-w-full" />
+        </div>
+      </div>
+
+      <!-- Product Details -->
       <div>
-        <h1 class="text-2xl font-bold mb-2">{{ product.name }}</h1>
-        <p class="text-gray-600 mb-1">{{ product.brand }}</p>
-        <p class="text-xl font-semibold mb-4">${{ product.price }}</p>
-        <p class="mb-4">{{ product.description }}</p>
+        <div class="bg-gradient-to-r from-store-red/5 to-pink-50 p-12 rounded-4xl mb-12 border border-store-red/20">
+          <p class="inline-block bg-store-red text-white font-bold px-6 py-2 rounded-full mb-8 text-sm uppercase tracking-wide">
+            {{ product.brand }}
+          </p>
+          <h1 class="text-5xl lg:text-6xl font-black mb-8 leading-tight bg-gradient-to-r from-gray-900 via-black to-gray-900 bg-clip-text text-transparent">
+            {{ product.name }}
+          </h1>
+          <div class="text-6xl lg:text-7xl font-black text-store-red mb-12">${{ product.price }}</div>
+        </div>
 
-        <NuxtLink to="/products" class="text-blue-600 hover:underline">
-          ← Back to products
-        </NuxtLink>
+        <div class="prose prose-xl max-w-none mb-16 p-8 bg-gray-50 rounded-3xl">
+          <p class="text-2xl leading-relaxed">{{ product.description }}</p>
+        </div>
+
+        <div class="flex space-x-6">
+          <NuxtLink 
+            to="/products"
+            class="flex-1 bg-store-black text-white py-6 px-12 rounded-3xl font-bold text-lg text-center hover:bg-store-gray-900 hover:shadow-2xl hover:scale-105 transition-all duration-500 shadow-2xl"
+          >
+            ← Back to Products
+          </NuxtLink>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section v-else>
-    <h1 class="text-xl font-bold mb-2">Product not found</h1>
-    <NuxtLink to="/products" class="text-blue-600 hover:underline">
-      ← Back to products
-    </NuxtLink>
-  </section>
+  <div v-else class="min-h-screen flex items-center justify-center py-20">
+    <div class="text-center max-w-md">
+      <h1 class="text-4xl font-black text-gray-900 mb-6">Product Not Found</h1>
+      <p class="text-xl text-gray-600 mb-8">The product you're looking for doesn't exist.</p>
+      <NuxtLink 
+        to="/products"
+        class="bg-store-red text-white px-10 py-4 rounded-3xl font-bold hover:bg-opacity-90 hover:shadow-2xl transition-all duration-300"
+      >
+        ← Browse Products
+      </NuxtLink>
+    </div>
+  </div>
 </template>
+
