@@ -18,3 +18,33 @@ npm install
 
 # Development server
 npm run dev
+```
+
+## Project Structure
+```text
+project/
+  app/
+    app.vue
+    pages/
+      index.vue        # /
+      products/
+        index.vue      # /products
+        [id].vue       # /products/:id
+    layouts/
+      default.vue
+    data/
+      products.ts
+```
+
+## Deployment
+```bash
+# Build
+npm run build
+
+# Preview production build
+npm run preview
+
+# Deploy to Vercel/Netlify (auto‑detects Nuxt)
+vercel --prod
+```
+Built by Md Taskin Hossain
