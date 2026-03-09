@@ -47,4 +47,8 @@ npm run preview
 # Deploy to Vercel/Netlify (auto‑detects Nuxt)
 vercel --prod
 ```
+
+Vercel site:
+https://nuxt-basic-ssr.vercel.app/
+
 Built by Md Taskin Hossain
