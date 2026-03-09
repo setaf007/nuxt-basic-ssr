@@ -1,5 +1,8 @@
 <!-- pages/products/[id].vue -->
 <script setup lang="ts">
+useHead({
+  title: 'Mini Store'
+})
 import { useRoute } from 'vue-router'
 import { findProductById } from '~/data/products'
 

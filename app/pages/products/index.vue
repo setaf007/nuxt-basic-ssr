@@ -1,5 +1,8 @@
 <!-- pages/products/index.vue -->
 <script setup lang="ts">
+useHead({
+  title: 'Products - Mini Store'
+})
 import { products } from '~/data/products'
 </script>
 
