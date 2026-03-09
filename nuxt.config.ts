@@ -8,9 +8,13 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      title: 'Mini Store',
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon-2.ico' },
-      ]
+      ],
+      meta: [
+        { name: 'description', content: 'Nuxt 3 SSR demo' }
+      ],
     }
   },
   nitro: {
