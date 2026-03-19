@@ -1,2 +1,4 @@
 User-Agent: *
-Disallow:
+Allow: /
+
+Sitemap: https://nuxt-basic-ssr.vercel.app/sitemap.xml

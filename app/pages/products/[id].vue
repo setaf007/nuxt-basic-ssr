@@ -1,14 +1,47 @@
 <!-- pages/products/[id].vue -->
 <script setup lang="ts">
-useHead({
-  title: 'Mini Store'
-})
 import { useRoute } from 'vue-router'
 import { findProductById } from '~/data/products'
 
+const config = useRuntimeConfig()
 const route = useRoute()
 const id = route.params.id as string
 const product = findProductById(id)
+
+const canonical = computed(() =>
+  new URL(route.fullPath || `/products/${id}`, config.public.siteUrl).toString()
+)
+
+useSeoMeta({
+  title: product ? product.name : 'Product',
+  description: product
+    ? product.description
+    : 'Product detail in Mini Store demo.',
+  ogTitle: product ? product.name : 'Product',
+  ogDescription: product ? product.description : '',
+  ogUrl: canonical.value,
+  ogType: 'article',
+})
+
+useHead({
+  link: [{ rel: 'canonical', href: canonical.value }],
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: product?.name || 'Product',
+      description: product?.description || '',
+      brand: { '@type': 'Brand', name: product?.brand || '' },
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'SGD',
+        price: product?.price || 0,
+        availability: 'https://schema.org/InStock'
+      }
+    })
+  }]
+})
 </script>
 
 <template>
@@ -26,7 +59,7 @@ const product = findProductById(id)
       <!-- Product Gallery -->
       <div class="sticky top-24">
         <div class="w-full aspect-square bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-4xl p-12 flex items-center justify-center shadow-2xl">
-          <img :src="product.image" :alt="product.name" class="w-96 h-96 object-cover rounded-3xl shadow-2xl max-w-full" />
+          <img :src="product.image" :alt="`${product.name}, ${product.brand} beauty product`" class="w-96 h-96 object-cover rounded-3xl shadow-2xl max-w-full" />
         </div>
       </div>
 

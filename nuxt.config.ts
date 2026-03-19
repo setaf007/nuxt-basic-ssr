@@ -13,8 +13,13 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon-2.ico' },
       ],
       meta: [
-        { name: 'description', content: 'Nuxt 3 SSR demo' }
+        { name: 'description', content: 'A simple Nuxt 3 SSR demo with ISR and SSG' }
       ],
+    }
+  },
+  runtimeConfig: {
+    public: {
+      siteUrl: `https://nuxt-basic-ssr.vercel.app/`
     }
   },
   nitro: {

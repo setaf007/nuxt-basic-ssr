@@ -1,7 +1,22 @@
 <!-- pages/index.vue -->
 <script setup lang="ts">
-useHead({
+const config = useRuntimeConfig()
+const route = useRoute()
+const canonical = computed(() => 
+  new URL(route.path || '/', config.public.siteUrl).toString()
+)
+
+useSeoMeta({ 
   title: 'Home - Mini Store',
+  description: 'Explore our curated collection of premium beauty products handpicked for you',
+  ogTitle: 'Discover Your Perfect Beauty Match - Mini Store',
+  ogDescription: 'Explore our curated collection of premium beauty products handpicked for you',
+  ogUrl: canonical.value,
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+ })
+useHead({
+  link: [{ rel: 'canonical', href: canonical.value }]
 })
 import { products } from '~/data/products'
 
